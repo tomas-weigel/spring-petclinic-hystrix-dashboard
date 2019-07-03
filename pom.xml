@@ -2,21 +2,62 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>spring-petclinic-microservices</artifactId>
-        <groupId>org.springframework.samples</groupId>
-        <version>2.1.4</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
+     <groupId>org.springframework.samples</groupId>
+    <version>2.1.4</version>
+    
     <artifactId>spring-petclinic-hystrix-dashboard</artifactId>
     <description>Circuit breaker dashboard with with Spring Cloud Netflix Hystrix</description>
 
     <properties>
+        <java.version>1.8</java.version>
+        <assertj.version>3.11.1</assertj.version>
+
+        <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+
+        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+
+        <docker.image.prefix>springcommunity</docker.image.prefix>
+        <docker.image.dockerfile.dir>${basedir}</docker.image.dockerfile.dir>
+        <docker.image.dockerize.version>v0.6.1</docker.image.dockerize.version>
+        <docker.plugin.version>1.2.0</docker.plugin.version>
         <docker.image.exposed.port>7979</docker.image.exposed.port>
         <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
     </properties>
 
+   <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    
     <dependencies>
 
         <!-- Spring Boot -->
@@ -40,6 +81,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
