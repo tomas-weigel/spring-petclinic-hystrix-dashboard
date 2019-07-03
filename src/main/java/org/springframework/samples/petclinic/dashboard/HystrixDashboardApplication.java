@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HystrixDashboardApplication {
 
     public static void main(String[] args) {
+	// test
         SpringApplication.run(HystrixDashboardApplication.class, args);
     }
 
